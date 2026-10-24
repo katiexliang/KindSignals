@@ -1,0 +1,99 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  @apply bg-ivory text-charcoal antialiased;
+}
+
+@layer components {
+  .card {
+    @apply rounded-2xl bg-white p-6 shadow-soft ring-1 ring-black/5;
+  }
+
+  /* Cards that invite interaction get a gentle lift on hover. */
+  .card-hover {
+    @apply transition duration-200 hover:-translate-y-0.5 hover:shadow-lg;
+  }
+
+  .nav-link {
+    @apply flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-charcoal/70 transition hover:bg-sage-100 hover:text-deepsage-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-deepsage-300;
+  }
+
+  .nav-link-active {
+    @apply bg-sage-300 text-deepsage-800 hover:bg-sage-300;
+  }
+}
+
+@layer utilities {
+  /* --- Signals mascot + playful motion --- */
+
+  /* Gentle up/down bob, like the buddy is floating happily. */
+  @keyframes signals-bob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+  .animate-bob {
+    animation: signals-bob 3.2s ease-in-out infinite;
+  }
+
+  /* A friendly wave (used on the sprout / arm). */
+  @keyframes signals-wave {
+    0%, 60%, 100% { transform: rotate(0deg); }
+    15% { transform: rotate(14deg); }
+    30% { transform: rotate(-8deg); }
+    45% { transform: rotate(10deg); }
+  }
+  .animate-wave {
+    transform-origin: 70% 90%;
+    animation: signals-wave 2.4s ease-in-out infinite;
+  }
+
+  /* Blink: scale the eyes vertically now and then. */
+  @keyframes signals-blink {
+    0%, 92%, 100% { transform: scaleY(1); }
+    96% { transform: scaleY(0.1); }
+  }
+  .animate-blink {
+    transform-origin: center;
+    animation: signals-blink 4.5s ease-in-out infinite;
+  }
+
+  /* Message bubbles pop in. */
+  @keyframes pop-in {
+    0% { opacity: 0; transform: translateY(8px) scale(0.98); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  .animate-pop-in {
+    animation: pop-in 0.28s ease-out both;
+  }
+
+  /* Soft floating accent (decorative leaves/sparkles). */
+  @keyframes float-soft {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-5px) rotate(4deg); }
+  }
+  .animate-float-soft {
+    animation: float-soft 5s ease-in-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-bob,
+    .animate-wave,
+    .animate-blink,
+    .animate-pop-in,
+    .animate-float-soft {
+      animation: none;
+    }
+  }
+}
